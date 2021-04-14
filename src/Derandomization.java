@@ -22,6 +22,9 @@ public class Derandomization {
          Clauses S1 = new Clauses(variables, 12);
          clauses.add(S1);
 
+         Clauses S2 = new Clauses(variables, 15);
+         clauses.add(S1);
+
 
          Derandomization.expectedWeight(clauses);
     }
@@ -38,14 +41,19 @@ public class Derandomization {
             double expectedWeightIfTrue = 0;
             //check clause for variable and determine expected weight
             for(Clauses clauses1 : clauses){
+                System.out.println("Back at beginning");
                 if (clauses1.getVariablesInClause().contains(variables) && !clauses1.isSatisfied()) /*and none of the variables are true */{
                     expectedWeight = (1 -  Math.pow(.5 , (clauses1.getNumberOfVariables() - 1/**/))) * clauses1.getWeight();
-                }else {
+                }else if(clauses1.isSatisfied() == true){
+                    expectedWeight = clauses1.getWeight();
+                }
+                else{
                     expectedWeight = (1 -  Math.pow(.5 , (clauses1.getNumberOfVariables()))) * clauses1.getWeight();
                 }
                 expectedWeightsFalse.add(expectedWeight);
             }
             expectedWeightIfFalse = sum(expectedWeightsFalse);
+            expectedWeightsFalse.clear();
             System.out.println("Expected weight if false: " + expectedWeightIfFalse);
 
 
@@ -54,12 +62,16 @@ public class Derandomization {
             for(Clauses clauses1 : clauses){
                 if (clauses1.getVariablesInClause().contains(variables)){
                     expectedWeight = clauses1.getWeight();
-                }else {
+                }else if (clauses1.isSatisfied() == true){
+                    expectedWeight = clauses1.getWeight();
+                }
+                else {
                     expectedWeight = (1 -  Math.pow(.5 , (clauses1.getNumberOfVariables()))) * clauses1.getWeight();
                 }
                 expectedWeightsTrue.add(expectedWeight);
             }
             expectedWeightIfTrue = sum(expectedWeightsTrue);
+            expectedWeightsTrue.clear();
             System.out.println("Expected weight if "+ variables.getName() + " is true: " + expectedWeightIfTrue);
             if(expectedWeightIfFalse > expectedWeightIfTrue){
                 variables.setTrue(false);
