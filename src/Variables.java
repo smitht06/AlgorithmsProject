@@ -1,12 +1,22 @@
 public class Variables {
+
     private int cost;
     private boolean isTrue;
+    private String name;
 
     public Variables(){};
 
-    public Variables(int cost, boolean isTrue) {
+    public Variables(String name, int cost) {
         this.cost = cost;
-        this.isTrue = isTrue;
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getCost() {
