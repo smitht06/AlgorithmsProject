@@ -8,10 +8,6 @@ public class Derandomization {
     //read from file
     private static ArrayList<Clauses> clauses = new ArrayList<>();
 
-
-
-
-
     public static void main(String [] args){
          Variables x1 = new Variables("x1",12);
          variables.add(x1);
@@ -23,9 +19,6 @@ public class Derandomization {
          clauses.add(S1);
 
          Clauses S2 = new Clauses(variables, 15);
-
-
-
 
          Derandomization.expectedWeight(clauses);
     }
@@ -118,4 +111,8 @@ public class Derandomization {
         }
         return sum;
     }
+
+    //public static ArrayList<String> readFromFile(String fileName){
+
+   // }
 }
