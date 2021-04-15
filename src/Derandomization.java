@@ -1,4 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Derandomization {
     //array of variables
@@ -9,17 +12,8 @@ public class Derandomization {
     private static ArrayList<Clauses> clauses = new ArrayList<>();
 
     public static void main(String [] args){
-         Variables x1 = new Variables("x1",12);
-         variables.add(x1);
-
-         Variables x2 = new Variables("x2", 6);
-         variables.add(x2);
-
-         Clauses S1 = new Clauses(variables, 12);
-         clauses.add(S1);
-
-         Clauses S2 = new Clauses(variables, 15);
-
+         readFromFile("Data/variables.csv");
+         readFromFile("Data/clauses.csv");
          Derandomization.expectedWeight(clauses);
     }
 
@@ -112,7 +106,42 @@ public class Derandomization {
         return sum;
     }
 
-    //public static ArrayList<String> readFromFile(String fileName){
+    public static void readFromFile(String fileName){
+      try {
+            File file = new File(fileName);
+            Scanner myReader = new Scanner(file);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                String[] stringArray = data.split(",");
+                if (fileName.contains("variables")){
+                    createVariableFromFile(stringArray);
+                }
+                else {
+                    createClauseFromFile(stringArray);
+                }
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+   }
 
-   // }
+    public static void createVariableFromFile(String[] record) {
+        Variables variable = new Variables(record[0], Integer.valueOf(record[1]));
+        variables.add(variable);
+    }
+
+    public static void createClauseFromFile(String[] record){
+        ArrayList<Variables> variablesInClause = new ArrayList<>();
+        for (int i = 1; i < record.length; i++){
+            for (Variables var:variables){
+                if (record[i].equals(var.getName())){
+                    variablesInClause.add(var);
+                }
+            }
+        }
+        Clauses clause = new Clauses(variablesInClause, Integer.valueOf(record[0]));
+        clauses.add(clause);
+    }
 }
