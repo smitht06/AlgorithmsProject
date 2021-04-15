@@ -15,12 +15,13 @@ public class Derandomization {
          readFromFile("Data/variables.csv");
          readFromFile("Data/clauses.csv");
          Derandomization.expectedWeight(clauses);
+         System.out.println("Complete");
     }
 
     //function for expected weight
     //x1 = 1
     //return expected weights, choose the value of the higher weight
-    public static double expectedWeight(ArrayList<Clauses> clauses){
+    public static void expectedWeight(ArrayList<Clauses> clauses){
         ArrayList<Double> expectedWeightsFalse = new ArrayList<>();
         ArrayList<Double> expectedWeightsTrue = new ArrayList<>();
         for(Variables variables : variables){
@@ -32,7 +33,6 @@ public class Derandomization {
             expectedWeightIfTrue = getExpectedWeightIfTrue(clauses, expectedWeightsTrue, variables);
             chooseHigherWeight(clauses, variables, expectedWeightIfFalse, expectedWeightIfTrue);
         }
-        return 0;
     }
 
     private static void chooseHigherWeight(ArrayList<Clauses> clauses, Variables variables, double expectedWeightIfFalse, double expectedWeightIfTrue) {
@@ -52,8 +52,7 @@ public class Derandomization {
                     clauses2.setSatisfied(true);
                 }
             }
-            System.out.println("this should print");
-            System.out.println(expectedWeightIfFalse);
+
         }
     }
 
@@ -81,7 +80,7 @@ public class Derandomization {
         double expectedWeight;
         double expectedWeightIfFalse;
         for(Clauses clauses1 : clauses){
-            System.out.println("Back at beginning");
+
             if (clauses1.getVariablesInClause().contains(variables) && !clauses1.isSatisfied()) /*and none of the variables are true */{
                 expectedWeight = (1 -  Math.pow(.5 , (clauses1.getNumberOfVariables() - 1/**/))) * clauses1.getWeight();
             }else if(clauses1.isSatisfied()){
@@ -128,7 +127,7 @@ public class Derandomization {
    }
 
     public static void createVariableFromFile(String[] record) {
-        Variables variable = new Variables(record[0], Integer.valueOf(record[1]));
+        Variables variable = new Variables(record[0], Integer.parseInt(record[1]));
         variables.add(variable);
     }
 
@@ -141,7 +140,7 @@ public class Derandomization {
                 }
             }
         }
-        Clauses clause = new Clauses(variablesInClause, Integer.valueOf(record[0]));
+        Clauses clause = new Clauses(variablesInClause, Integer.parseInt(record[0]));
         clauses.add(clause);
     }
 }
