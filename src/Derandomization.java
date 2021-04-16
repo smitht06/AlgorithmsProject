@@ -5,10 +5,7 @@ import java.util.Scanner;
 
 public class Derandomization {
     //array of variables
-    //read from file
     private static ArrayList<Variables> variables = new ArrayList<>();
-
-    //read from file
     private static ArrayList<Clauses> clauses = new ArrayList<>();
 
     public static void main(String [] args){
@@ -24,70 +21,61 @@ public class Derandomization {
     public static void expectedWeight(ArrayList<Clauses> clauses){
         ArrayList<Double> expectedWeightsFalse = new ArrayList<>();
         ArrayList<Double> expectedWeightsTrue = new ArrayList<>();
-        for(Variables variables : variables){
-            double expectedWeight = 0;
-            double expectedWeightIfFalse = 0;
-            double expectedWeightIfTrue = 0;
+        for(Variables variable : variables){
             //check clause for variable and determine expected weight
-            expectedWeightIfFalse = getExpectedWeightIfFalse(clauses, expectedWeightsFalse, variables);
-            expectedWeightIfTrue = getExpectedWeightIfTrue(clauses, expectedWeightsTrue, variables);
-            chooseHigherWeight(clauses, variables, expectedWeightIfFalse, expectedWeightIfTrue);
+            double expectedWeightIfFalse = getExpectedWeightIfFalse(clauses, expectedWeightsFalse, variable);
+            double expectedWeightIfTrue = getExpectedWeightIfTrue(clauses, expectedWeightsTrue, variable);
+            chooseHigherWeight(clauses, variable, expectedWeightIfFalse, expectedWeightIfTrue);
         }
     }
 
-    private static void chooseHigherWeight(ArrayList<Clauses> clauses, Variables variables, double expectedWeightIfFalse, double expectedWeightIfTrue) {
+    private static void chooseHigherWeight(ArrayList<Clauses> clauses, Variables variable, double expectedWeightIfFalse, double expectedWeightIfTrue) {
         if(expectedWeightIfFalse > expectedWeightIfTrue){
-            variables.setTrue(false);
-            expectedWeightIfFalse = 0;
-            for (Clauses clauses2 : clauses){
-                if (clauses2.getVariablesInClause().contains(variables)){
-                    clauses2.setNumberOfVariables(clauses2.getNumberOfVariables() - 1 );
+            variable.setTrue(false);
+            for (Clauses clause : clauses){
+                if (clause.getVariablesInClause().contains(variable)){
+                    clause.setNumberOfVariables(clause.getNumberOfVariables() - 1 );
                 }}
-            System.out.println(expectedWeightIfFalse);
         }else {
-            variables.setTrue(true);
-            expectedWeightIfFalse = 0;
-            for (Clauses clauses2 : clauses){
-                if (clauses2.getVariablesInClause().contains(variables)){
-                    clauses2.setSatisfied(true);
+            variable.setTrue(true);
+            for (Clauses clause : clauses){
+                if (clause.getVariablesInClause().contains(variable)){
+                    clause.setSatisfied(true);
                 }
             }
-
         }
     }
 
-    private static double getExpectedWeightIfTrue(ArrayList<Clauses> clauses, ArrayList<Double> expectedWeightsTrue, Variables variables) {
+    private static double getExpectedWeightIfTrue(ArrayList<Clauses> clauses, ArrayList<Double> expectedWeightsTrue, Variables variable) {
         double expectedWeight;
         double expectedWeightIfTrue;
-        for(Clauses clauses1 : clauses){
-            if (clauses1.getVariablesInClause().contains(variables)){
-                expectedWeight = clauses1.getWeight();
-            }else if (clauses1.isSatisfied()){
-                expectedWeight = clauses1.getWeight();
+        for(Clauses clause : clauses){
+            if (clause.getVariablesInClause().contains(variable) || clause.isSatisfied()){
+                expectedWeight = clause.getWeight();
             }
             else {
-                expectedWeight = (1 -  Math.pow(.5 , (clauses1.getNumberOfVariables()))) * clauses1.getWeight();
+                expectedWeight = (1 -  Math.pow(.5 , (clause.getNumberOfVariables()))) * clause.getWeight();
             }
             expectedWeightsTrue.add(expectedWeight);
         }
         expectedWeightIfTrue = sum(expectedWeightsTrue);
         expectedWeightsTrue.clear();
-        System.out.println("Expected weight if "+ variables.getName() + " is true: " + expectedWeightIfTrue);
+        System.out.println("Expected weight if "+ variable.getName() + " is true: " + expectedWeightIfTrue);
         return expectedWeightIfTrue;
     }
 
     private static double getExpectedWeightIfFalse(ArrayList<Clauses> clauses, ArrayList<Double> expectedWeightsFalse, Variables variables) {
         double expectedWeight;
         double expectedWeightIfFalse;
-        for(Clauses clauses1 : clauses){
+        for(Clauses clause : clauses){
 
-            if (clauses1.getVariablesInClause().contains(variables) && !clauses1.isSatisfied()) /*and none of the variables are true */{
-                expectedWeight = (1 -  Math.pow(.5 , (clauses1.getNumberOfVariables() - 1/**/))) * clauses1.getWeight();
-            }else if(clauses1.isSatisfied()){
-                expectedWeight = clauses1.getWeight();
+            if (clause.getVariablesInClause().contains(variables) && !clause.isSatisfied()) /*and none of the variables are true */{
+                expectedWeight = (1 -  Math.pow(.5 , (clause.getNumberOfVariables() - 1/**/))) * clause.getWeight();
+            }else if(clause.isSatisfied()){
+                expectedWeight = clause.getWeight();
             }
             else{
-                expectedWeight = (1 -  Math.pow(.5 , (clauses1.getNumberOfVariables()))) * clauses1.getWeight();
+                expectedWeight = (1 -  Math.pow(.5 , (clause.getNumberOfVariables()))) * clause.getWeight();
             }
             expectedWeightsFalse.add(expectedWeight);
         }
