@@ -11,32 +11,32 @@ public class Derandomization {
     public static void main(String [] args){
          readFromFile("Data/variables.csv");
          readFromFile("Data/clauses.csv");
-         Derandomization.expectedWeight(clauses);
+         Derandomization.algorithm();
          System.out.println("Complete");
     }
 
     //function for expected weight
     //x1 = 1
     //return expected weights, choose the value of the higher weight
-    public static void expectedWeight(ArrayList<Clauses> clauses){
-        ArrayList<Double> expectedWeightsFalse = new ArrayList<>();
-        ArrayList<Double> expectedWeightsTrue = new ArrayList<>();
+    public static void algorithm(){
         for(Variables variable : variables){
             //check clause for variable and determine expected weight
-            double expectedWeightIfFalse = getExpectedWeightIfFalse(clauses, expectedWeightsFalse, variable);
-            double expectedWeightIfTrue = getExpectedWeightIfTrue(clauses, expectedWeightsTrue, variable);
-            chooseHigherWeight(clauses, variable, expectedWeightIfFalse, expectedWeightIfTrue);
+            double expectedWeightIfFalse = getExpectedWeightIfFalse(variable);
+            double expectedWeightIfTrue = getExpectedWeightIfTrue(variable);
+            chooseHigherWeight(variable, expectedWeightIfFalse, expectedWeightIfTrue);
         }
     }
 
-    private static void chooseHigherWeight(ArrayList<Clauses> clauses, Variables variable, double expectedWeightIfFalse, double expectedWeightIfTrue) {
+    private static void chooseHigherWeight(Variables variable, double expectedWeightIfFalse, double expectedWeightIfTrue) {
         if(expectedWeightIfFalse > expectedWeightIfTrue){
+            System.out.println(variable.getName() + "is set to false.");
             variable.setTrue(false);
             for (Clauses clause : clauses){
                 if (clause.getVariablesInClause().contains(variable)){
                     clause.setNumberOfVariables(clause.getNumberOfVariables() - 1 );
                 }}
         }else {
+            System.out.println(variable.getName() + "is set to true.");
             variable.setTrue(true);
             for (Clauses clause : clauses){
                 if (clause.getVariablesInClause().contains(variable)){
@@ -46,9 +46,11 @@ public class Derandomization {
         }
     }
 
-    private static double getExpectedWeightIfTrue(ArrayList<Clauses> clauses, ArrayList<Double> expectedWeightsTrue, Variables variable) {
+    private static double getExpectedWeightIfTrue(Variables variable) {
         double expectedWeight;
         double expectedWeightIfTrue;
+        ArrayList<Double> expectedWeightsTrue = new ArrayList<>();
+
         for(Clauses clause : clauses){
             if (clause.getVariablesInClause().contains(variable) || clause.isSatisfied()){
                 expectedWeight = clause.getWeight();
@@ -59,17 +61,18 @@ public class Derandomization {
             expectedWeightsTrue.add(expectedWeight);
         }
         expectedWeightIfTrue = sum(expectedWeightsTrue);
-        expectedWeightsTrue.clear();
         System.out.println("Expected weight if "+ variable.getName() + " is true: " + expectedWeightIfTrue);
         return expectedWeightIfTrue;
     }
 
-    private static double getExpectedWeightIfFalse(ArrayList<Clauses> clauses, ArrayList<Double> expectedWeightsFalse, Variables variables) {
+    private static double getExpectedWeightIfFalse(Variables variable) {
         double expectedWeight;
         double expectedWeightIfFalse;
+        ArrayList<Double> expectedWeightsFalse = new ArrayList<>();
+
         for(Clauses clause : clauses){
 
-            if (clause.getVariablesInClause().contains(variables) && !clause.isSatisfied()) /*and none of the variables are true */{
+            if (clause.getVariablesInClause().contains(variable) && !clause.isSatisfied()) /*and none of the variables are true */{
                 expectedWeight = (1 -  Math.pow(.5 , (clause.getNumberOfVariables() - 1/**/))) * clause.getWeight();
             }else if(clause.isSatisfied()){
                 expectedWeight = clause.getWeight();
@@ -81,7 +84,7 @@ public class Derandomization {
         }
         expectedWeightIfFalse = sum(expectedWeightsFalse);
         expectedWeightsFalse.clear();
-        System.out.println("Expected weight if false: " + expectedWeightIfFalse);
+        System.out.println("Expected weight if " + variable.getName() + " is  false: " + expectedWeightIfFalse);
         return expectedWeightIfFalse;
     }
 
