@@ -4,23 +4,27 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Derandomization {
-    //array of variables
+    private static final double budget = 20;
+    private static double cost = 0;
     private static ArrayList<Variables> variables = new ArrayList<>();
     private static ArrayList<Clauses> clauses = new ArrayList<>();
+
 
     public static void main(String [] args){
          readFromFile("Data/variables.csv");
          readFromFile("Data/clauses.csv");
          Derandomization.algorithm();
+         printResults();
          System.out.println("Complete");
     }
 
     //function for expected weight
     //x1 = 1
     //return expected weights, choose the value of the higher weight
-    public static void algorithm(){
+    private static void algorithm(){
         for(Variables variable : variables){
             //check clause for variable and determine expected weight
+            System.out.println("Setting each variable to true and false to see expected weight.");
             double expectedWeightIfFalse = getExpectedWeightIfFalse(variable);
             double expectedWeightIfTrue = getExpectedWeightIfTrue(variable);
             chooseHigherWeight(variable, expectedWeightIfFalse, expectedWeightIfTrue);
@@ -29,20 +33,29 @@ public class Derandomization {
 
     private static void chooseHigherWeight(Variables variable, double expectedWeightIfFalse, double expectedWeightIfTrue) {
         if(expectedWeightIfFalse > expectedWeightIfTrue){
-            System.out.println(variable.getName() + "is set to false.");
+            System.out.println(variable.getName() + " is set to false.");
             variable.setTrue(false);
             for (Clauses clause : clauses){
                 if (clause.getVariablesInClause().contains(variable)){
                     clause.setNumberOfVariables(clause.getNumberOfVariables() - 1 );
-                }}
-        }else {
-            System.out.println(variable.getName() + "is set to true.");
+                }
+            }
+            pop(variable);
+        }
+        else if ((expectedWeightIfFalse < expectedWeightIfTrue) && (cost + variable.getCost()) < budget){
+            System.out.println(variable.getName() + " is set to true.");
             variable.setTrue(true);
+            cost = cost + variable.getCost();
             for (Clauses clause : clauses){
                 if (clause.getVariablesInClause().contains(variable)){
                     clause.setSatisfied(true);
                 }
             }
+        }
+        else {
+            System.out.println("Adding variable would go over budget. Variable set to false.");
+            variable.setTrue(false);
+            pop(variable);
         }
     }
 
@@ -88,7 +101,7 @@ public class Derandomization {
         return expectedWeightIfFalse;
     }
 
-    public static double sum(ArrayList<Double> list) {
+    private static double sum(ArrayList<Double> list) {
         double sum = 0;
         for (double i: list) {
             sum += i;
@@ -96,7 +109,15 @@ public class Derandomization {
         return sum;
     }
 
-    public static void readFromFile(String fileName){
+    private static void pop(Variables variable){
+        for (Clauses clause: clauses){
+            if (clause.getVariablesInClause().contains(variable)){
+                clause.remove(variable);
+            }
+        }
+    }
+
+    private static void readFromFile(String fileName){
       try {
             File file = new File(fileName);
             Scanner myReader = new Scanner(file);
@@ -117,12 +138,12 @@ public class Derandomization {
         }
    }
 
-    public static void createVariableFromFile(String[] record) {
+    private static void createVariableFromFile(String[] record) {
         Variables variable = new Variables(record[0], Integer.parseInt(record[1]));
         variables.add(variable);
     }
 
-    public static void createClauseFromFile(String[] record){
+    private static void createClauseFromFile(String[] record){
         ArrayList<Variables> variablesInClause = new ArrayList<>();
         for (int i = 1; i < record.length; i++){
             for (Variables var:variables){
@@ -133,5 +154,24 @@ public class Derandomization {
         }
         Clauses clause = new Clauses(variablesInClause, Integer.parseInt(record[0]));
         clauses.add(clause);
+    }
+
+    private static void printResults(){
+        double totalWeight = 0;
+        System.out.println("The final results are: ");
+        System.out.print("Variables ");
+        for (Variables variable: variables) {
+            if (variable.isTrue()){
+                System.out.print(variable.getName() + " ");
+            }
+        }
+        System.out.println(" are true. With a final cost of " + cost);
+        System.out.print("The following weight is satisfied: ");
+        for (Clauses clause: clauses){
+            if (clause.isSatisfied()){
+                totalWeight = totalWeight + clause.getWeight();
+            }
+        }
+        System.out.println(totalWeight);
     }
 }

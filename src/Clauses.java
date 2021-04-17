@@ -21,6 +21,10 @@ public class Clauses {
         this.variablesInClause = variablesInClause;
     }
 
+    public void remove(Variables variable){
+        this.variablesInClause.remove(variable);
+    }
+
     public int getWeight() {
         return weight;
     }
