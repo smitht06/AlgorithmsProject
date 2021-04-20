@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Derandomization {
@@ -11,8 +12,9 @@ public class Derandomization {
     public static void main(String [] args){
          readFromFile("Data/variables.csv");
          readFromFile("Data/clauses.csv");
-         Derandomization.algorithm();
-         System.out.println("Complete");
+//         Derandomization.algorithm();
+//         System.out.println("Complete");
+         randomization(variables);
     }
 
     //function for expected weight
@@ -133,5 +135,26 @@ public class Derandomization {
         }
         Clauses clause = new Clauses(variablesInClause, Integer.parseInt(record[0]));
         clauses.add(clause);
+    }
+
+    public static void randomization(ArrayList<Variables> variables, ArrayList<Clauses> clauses){
+        Random random = new Random();
+        ArrayList<Double> expectedWeights = new ArrayList<>();
+        for (Variables variable :variables){
+            variable.setTrue(random.nextBoolean());
+            System.out.println(variable.getName() + " " + variable.isTrue());
+
+            for (Clauses clause:clauses){
+                if (variable.isTrue() == true && clause.getVariablesInClause().contains(variable)){
+                    expectedWeights.add((double)clause.getWeight());
+                    clause.setSatisfied(true);
+                }else{
+
+                }
+            }
+        }
+
+
+
     }
 }

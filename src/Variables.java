@@ -34,4 +34,6 @@ public class Variables {
     public void setTrue(boolean aTrue) {
         isTrue = aTrue;
     }
+
+
 }
