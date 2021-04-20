@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Derandomization {
+public class MaxSatSolution {
     //array of variables
     private static ArrayList<Variables> variables = new ArrayList<>();
     private static ArrayList<Clauses> clauses = new ArrayList<>();
@@ -14,7 +14,7 @@ public class Derandomization {
          readFromFile("Data/clauses.csv");
 //         Derandomization.algorithm();
 //         System.out.println("Complete");
-         randomization(variables);
+           randomization(variables, clauses);
     }
 
     //function for expected weight
@@ -140,21 +140,57 @@ public class Derandomization {
     public static void randomization(ArrayList<Variables> variables, ArrayList<Clauses> clauses){
         Random random = new Random();
         ArrayList<Double> expectedWeights = new ArrayList<>();
+        double weight = 0;
+        Variables x1 = variables.get(0);
+        Variables x2 = variables.get(1);
+        Variables x3 = variables.get(2);
+        x1.setTrue(false);
+        x2.setTrue(false);
+        x3.setTrue(true);
+//        for(Variables variable : variables){
+//            variable.setTrue(random.nextBoolean());
+//        }
         for (Variables variable :variables){
-            variable.setTrue(random.nextBoolean());
+            int runCount = 1;
             System.out.println(variable.getName() + " " + variable.isTrue());
-
+            int clauseNumber = 1;
+            int cost = 0;
+            int resources = 5;
             for (Clauses clause:clauses){
-                if (variable.isTrue() == true && clause.getVariablesInClause().contains(variable)){
-                    expectedWeights.add((double)clause.getWeight());
+                expectedWeights.clear();
+                clause.setNumberOfVariables(clause.getVariablesInClause().size());
+                ArrayList<Variables> variablesinclause = clause.getVariablesInClause();
+                if (variable.isTrue() && clause.getVariablesInClause().contains(variable)){
+                    weight = clause.getWeight();
                     clause.setSatisfied(true);
-                }else{
+                    cost += variable.getCost();
+                    expectedWeights.add(weight);
 
+                    //System.out.println("Variable " + variable.getName() + " is true, the weight is " + weight);
+                }else if(!variable.isTrue() && clause.getVariablesInClause().contains(variable) && !clause.isSatisfied()){
+                    clause.setNumberOfVariables(clause.getNumberOfVariables() - 1);
+                    //System.out.println("number of variables remaining in clause " + clauseNumber +" "+ clause.getNumberOfVariables());
+                    weight = ((1 -  Math.pow(.5 , (clause.getNumberOfVariables()))) * clause.getWeight());
+                    expectedWeights.add(weight);
+                    cost += variable.getCost();
+
+                    //System.out.println("Variable " + variable.getName() + " is false, the weight is " + weight);
                 }
+                else{
+                    //System.out.println("This variable is not in this clause and it is not satisfied");
+                    weight = (1 -  Math.pow(.5 , (clause.getNumberOfVariables()))) * clause.getWeight();
+                    expectedWeights.add(weight);
+
             }
-        }
+               for(double weights:expectedWeights){
+                   System.out.println(clauseNumber + " " +weights);
+               }
+                clauseNumber++;
+
+            }
+        }}
 
 
 
     }
-}
+

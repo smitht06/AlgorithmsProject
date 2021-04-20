@@ -30,7 +30,7 @@ public class Clauses {
     }
 
     public int getNumberOfVariables(){
-        return this.getVariablesInClause().size();
+        return this.numberOfVariables;
     }
 
     public void setNumberOfVariables(int numberOfVariables) {
