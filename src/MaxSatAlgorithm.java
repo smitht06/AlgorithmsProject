@@ -141,7 +141,7 @@ public class MaxSatAlgorithm {
    }
 
     private static void createVariableFromFile(String[] record) {
-        Variables variable = new Variables(record[0], Integer.parseInt(record[1]));
+        Variables variable = new Variables(record[0], Double.parseDouble(record[1]));
         variables.add(variable);
     }
 
