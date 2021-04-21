@@ -1,12 +1,12 @@
 public class Variables {
 
-    private int cost;
+    private double cost;
     private boolean isTrue;
     private String name;
 
     public Variables(){};
 
-    public Variables(String name, int cost) {
+    public Variables(String name, double cost) {
         this.cost = cost;
         this.name = name;
     }
@@ -19,7 +19,7 @@ public class Variables {
         this.name = name;
     }
 
-    public int getCost() {
+    public double getCost() {
         return cost;
     }
 

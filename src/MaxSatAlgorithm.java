@@ -1,9 +1,10 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
-public class Derandomization {
+public class MaxSatAlgorithm {
     private static final double budget = 20;
     private static double cost = 0;
     private static ArrayList<Variables> variables = new ArrayList<>();
@@ -13,9 +14,10 @@ public class Derandomization {
     public static void main(String [] args){
          readFromFile("Data/variables.csv");
          readFromFile("Data/clauses.csv");
-         Derandomization.algorithm();
-         printResults();
-         System.out.println("Complete");
+//         Derandomization.algorithm();
+//         printResults();
+//         System.out.println("Complete");
+        randomization(variables,clauses);
     }
 
     //function for expected weight
@@ -139,7 +141,7 @@ public class Derandomization {
    }
 
     private static void createVariableFromFile(String[] record) {
-        Variables variable = new Variables(record[0], Integer.parseInt(record[1]));
+        Variables variable = new Variables(record[0], Double.parseDouble(record[1]));
         variables.add(variable);
     }
 
@@ -173,5 +175,30 @@ public class Derandomization {
             }
         }
         System.out.println(totalWeight);
+    }
+
+    private static double randomization(ArrayList<Variables> variables, ArrayList<Clauses> clauses){
+        Random randomBool = new Random();
+        double weight = 0;
+        double cost = 0;
+        for(Variables variable : variables) {
+            variable.setTrue(randomBool.nextBoolean());
+            System.out.println(variable.getName() + " " + variable.isTrue());
+            if(variable.isTrue()){
+                cost+=variable.getCost();
+            }
+        }
+
+        for(Variables variables1 : variables) {
+            for (Clauses clause : clauses) {
+                if (variables1.isTrue() && clause.getVariablesInClause().contains(variables1) && !clause.isSatisfied()) {
+                    weight += clause.getWeight();
+                    clause.setSatisfied(true);
+                }
+            }
+        }
+        System.out.println(weight);
+        System.out.println(cost);
+        return weight;
     }
 }
