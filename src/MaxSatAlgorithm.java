@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class MaxSatAlgorithm {
-    private static final double budget = 20;
+    private static final double budget = 17.62;
     private static double cost = 0;
     private static ArrayList<Variables> variables = new ArrayList<>();
     private static ArrayList<Clauses> clauses = new ArrayList<>();
@@ -14,10 +14,10 @@ public class MaxSatAlgorithm {
     public static void main(String [] args){
          readFromFile("Data/variables.csv");
          readFromFile("Data/clauses.csv");
-//         Derandomization.algorithm();
-//         printResults();
-//         System.out.println("Complete");
-        randomization(variables,clauses);
+         algorithm();
+         printResults();
+         System.out.println("Complete");
+//        randomization(variables,clauses);
     }
 
     //function for expected weight
