@@ -2,13 +2,13 @@ import java.util.ArrayList;
 
 public class Clauses {
     private ArrayList<Variables> variablesInClause;
-    private int weight;
+    private double weight;
     private int numberOfVariables;
     private boolean isSatisfied;
 
     public Clauses(){};
 
-    public Clauses(ArrayList<Variables> variablesInClause, int weight) {
+    public Clauses(ArrayList<Variables> variablesInClause, double weight) {
         this.variablesInClause = variablesInClause;
         this.weight = weight;
     }
@@ -25,7 +25,7 @@ public class Clauses {
         this.variablesInClause.remove(variable);
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
