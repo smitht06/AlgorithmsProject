@@ -5,25 +5,39 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class MaxSatAlgorithm {
-    private static final double budget = 20;
+    private static final double budget = 17.62;
     private static double cost = 0;
     private static ArrayList<Variables> variables = new ArrayList<>();
     private static ArrayList<Clauses> clauses = new ArrayList<>();
 
 
     public static void main(String [] args){
-         readFromFile("Data/variables.csv");
-         readFromFile("Data/clauses.csv");
-//         Derandomization.algorithm();
-//         printResults();
-//         System.out.println("Complete");
-        randomization(variables,clauses);
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Please enter 1 to the derandomized algorithm, 2 for randomized:");
+        String argument = scanner.nextLine();
+
+        if (argument.equals("1") || argument.equals("2")){
+            readFromFile("../Data/variables.csv");
+            readFromFile("../Data/clauses.csv");
+            algorithm(argument);
+        }
+        else {
+            System.out.println("An incorrect was argument given. Please try running again using 1 or 2 as an argument.");
+        }
     }
 
-    //function for expected weight
-    //x1 = 1
-    //return expected weights, choose the value of the higher weight
-    private static void algorithm(){
+    private static void algorithm(String algorithm){
+        if (algorithm.equals("1")){
+            derandomize();
+            printResults();
+            System.out.println("Complete");
+        }
+        else if (algorithm.equals("2")) {
+            randomization(variables, clauses);
+        }
+    }
+
+    private static void derandomize(){
         for(Variables variable : variables){
             //check clause for variable and determine expected weight
             System.out.println("Setting each variable to true and false to see expected weight.");
@@ -44,7 +58,7 @@ public class MaxSatAlgorithm {
             }
             pop(variable);
         }
-        else if ((expectedWeightIfFalse < expectedWeightIfTrue) && (cost + variable.getCost()) < budget){
+        else if ((expectedWeightIfFalse <= expectedWeightIfTrue) && (cost + variable.getCost()) < budget){
             System.out.println(variable.getName() + " is set to true.");
             variable.setTrue(true);
             cost = cost + variable.getCost();
@@ -154,7 +168,7 @@ public class MaxSatAlgorithm {
                 }
             }
         }
-        Clauses clause = new Clauses(variablesInClause, Integer.parseInt(record[0]));
+        Clauses clause = new Clauses(variablesInClause, Double.parseDouble(record[0]));
         clauses.add(clause);
     }
 
@@ -174,18 +188,22 @@ public class MaxSatAlgorithm {
                 totalWeight = totalWeight + clause.getWeight();
             }
         }
-        System.out.println(totalWeight);
+        System.out.println("" + totalWeight + " in thousands of people.");
     }
 
     private static double randomization(ArrayList<Variables> variables, ArrayList<Clauses> clauses){
         Random randomBool = new Random();
         double weight = 0;
-        double cost = 0;
+        double runningCost = 0;
         for(Variables variable : variables) {
-            variable.setTrue(randomBool.nextBoolean());
+            Boolean nextBool = randomBool.nextBoolean();
+            if (nextBool && (runningCost + variable.getCost() > budget)){
+                nextBool = false;
+            }
+            variable.setTrue(nextBool);
             System.out.println(variable.getName() + " " + variable.isTrue());
             if(variable.isTrue()){
-                cost+=variable.getCost();
+                runningCost+=variable.getCost();
             }
         }
 
@@ -198,7 +216,7 @@ public class MaxSatAlgorithm {
             }
         }
         System.out.println(weight);
-        System.out.println(cost);
+        System.out.println(runningCost);
         return weight;
     }
 }
