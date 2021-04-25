@@ -1,0 +1,14 @@
+Development log: Advanced Algorithms Project
+Name: Tony Smith and Andrew Hartsfield
+
+April 13, 2021: TS: Created Variable and Clause class, started basic derandomization
+April 14, 2021: TS: Fixed math and added clauses to derandomization, refactored methods for readability
+April 14, 2021: AH: Derandomization can now read from file and create clauses and variables from input file.
+April 15, 2021: AH: Refactor for readability and remove unused variables
+April 17, 2021: AH: Add more variables/ clauses in file. Remove more unnecessary variables/ arguments. Remove variable
+from clause when set to false.
+April 20, 2021: TS: Add randomization algorithm
+April 21, 2021: TS: Change cost to double and add all variables
+April 21, 2021: AH: Add all clauses, update budget to true number
+April 22, 2021: AH: Add bash script for compilation and running, change weight to thousands of people, change weight to
+double

@@ -48,7 +48,7 @@ public class MaxSatAlgorithm {
     }
 
     private static void chooseHigherWeight(Variables variable, double expectedWeightIfFalse, double expectedWeightIfTrue) {
-        if(expectedWeightIfFalse > expectedWeightIfTrue){
+        if(expectedWeightIfFalse >= expectedWeightIfTrue){
             System.out.println(variable.getName() + " is set to false.");
             variable.setTrue(false);
             for (Clauses clause : clauses){
@@ -58,7 +58,7 @@ public class MaxSatAlgorithm {
             }
             pop(variable);
         }
-        else if ((expectedWeightIfFalse <= expectedWeightIfTrue) && (cost + variable.getCost()) < budget){
+        else if ((expectedWeightIfFalse < expectedWeightIfTrue) && (cost + variable.getCost()) < budget){
             System.out.println(variable.getName() + " is set to true.");
             variable.setTrue(true);
             cost = cost + variable.getCost();
@@ -181,14 +181,14 @@ public class MaxSatAlgorithm {
                 System.out.print(variable.getName() + " ");
             }
         }
-        System.out.println(" are true. With a final cost of " + cost);
-        System.out.print("The following weight is satisfied: ");
+        System.out.println(" are true (everything else is false) with a final cost of $" + cost + "M.");
+        System.out.print("The following clauses were satisfied: ");
         for (Clauses clause: clauses){
             if (clause.isSatisfied()){
                 totalWeight = totalWeight + clause.getWeight();
             }
         }
-        System.out.println("" + totalWeight + " in thousands of people.");
+        System.out.println("The following weight is satisfied: " + totalWeight + " in thousands of people.");
     }
 
     private static double randomization(ArrayList<Variables> variables, ArrayList<Clauses> clauses){
@@ -201,7 +201,7 @@ public class MaxSatAlgorithm {
                 nextBool = false;
             }
             variable.setTrue(nextBool);
-            System.out.println(variable.getName() + " " + variable.isTrue());
+            System.out.println("The variable " + variable.getName() + " was set to " + variable.isTrue());
             if(variable.isTrue()){
                 runningCost+=variable.getCost();
             }
@@ -215,8 +215,16 @@ public class MaxSatAlgorithm {
                 }
             }
         }
-        System.out.println(weight);
-        System.out.println(runningCost);
+
+        System.out.println("The variables that were set to true are: ");
+        for(Variables variable : variables){
+            if (variable.isTrue()){
+                System.out.print(variable.getName() + " ");
+            }
+        }
+        System.out.println();
+        System.out.println("The final weight is: " + weight + " in thousands of people.");
+        System.out.println("The total cost came to be: $" + runningCost + "M.");
         return weight;
     }
 }
