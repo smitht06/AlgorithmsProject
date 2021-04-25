@@ -182,14 +182,14 @@ public class MaxSatAlgorithm {
                 System.out.print(variable.getName() + " ");
             }
         }
-        System.out.println(" are true (everything else is false) with a final cost of " + cost);
-        System.out.print("The following weight is satisfied: ");
+        System.out.println(" are true (everything else is false) with a final cost of $" + cost + "M.");
+        System.out.print("The following clauses were satisfied: ");
         for (Clauses clause: clauses){
             if (clause.isSatisfied()){
                 totalWeight = totalWeight + clause.getWeight();
             }
         }
-        System.out.println("" + totalWeight + " in thousands of people.");
+        System.out.println("The following weight is satisfied: " + totalWeight + " in thousands of people.");
     }
 
     private static double randomization(ArrayList<Variables> variables, ArrayList<Clauses> clauses){
