@@ -5,12 +5,21 @@ public class Clauses {
     private double weight;
     private int numberOfVariables;
     private boolean isSatisfied;
+    private int clauseNumber;
 
     public Clauses(){};
 
     public Clauses(ArrayList<Variables> variablesInClause, double weight) {
         this.variablesInClause = variablesInClause;
         this.weight = weight;
+    }
+
+    public int getClauseNumber() {
+        return clauseNumber;
+    }
+
+    public void setClauseNumber(int clauseNumber) {
+        this.clauseNumber = clauseNumber;
     }
 
     public ArrayList<Variables> getVariablesInClause() {

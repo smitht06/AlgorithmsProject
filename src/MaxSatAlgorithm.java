@@ -160,6 +160,7 @@ public class MaxSatAlgorithm {
     }
 
     private static void createClauseFromFile(String[] record){
+
         ArrayList<Variables> variablesInClause = new ArrayList<>();
         for (int i = 1; i < record.length; i++){
             for (Variables var:variables){
@@ -183,7 +184,11 @@ public class MaxSatAlgorithm {
         }
         System.out.println(" are true (everything else is false) with a final cost of $" + cost + "B.");
         System.out.print("The following clauses were satisfied: ");
+        int i = 1;
         for (Clauses clause: clauses){
+            clause.setClauseNumber(i);
+            System.out.print(" " + clause.getClauseNumber() + ",");
+            i++;
             if (clause.isSatisfied()){
                 totalWeight = totalWeight + clause.getWeight();
             }
