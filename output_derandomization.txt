@@ -1,0 +1,176 @@
+Please enter 1 to the derandomized algorithm, 2 for randomized:Setting each variable to true and false to see expected weight.
+Expected weight if x1 is  false: 18224.683852037466
+Expected weight if x1 is true: 18224.683852037466
+x1 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x2 is  false: 18224.683852037466
+Expected weight if x2 is true: 18224.683852037466
+x2 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x3 is  false: 18223.692975982507
+Expected weight if x3 is true: 18225.674728092432
+x3 is set to true.
+Setting each variable to true and false to see expected weight.
+Expected weight if x4 is  false: 18225.674728092432
+Expected weight if x4 is true: 18225.674728092432
+x4 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x5 is  false: 18225.674728092432
+Expected weight if x5 is true: 18225.674728092432
+x5 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x6 is  false: 18225.674728092432
+Expected weight if x6 is true: 18225.674728092432
+x6 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x7 is  false: 18225.674728092432
+Expected weight if x7 is true: 18225.674728092432
+x7 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x8 is  false: 18225.674728092432
+Expected weight if x8 is true: 18225.674728092432
+x8 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x9 is  false: 18225.674728092432
+Expected weight if x9 is true: 18225.674728092432
+x9 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x10 is  false: 18224.098709932565
+Expected weight if x10 is true: 18227.250746252303
+x10 is set to true.
+Setting each variable to true and false to see expected weight.
+Expected weight if x11 is  false: 18226.75295621324
+Expected weight if x11 is true: 18227.748536291365
+x11 is set to true.
+Setting each variable to true and false to see expected weight.
+Expected weight if x12 is  false: 18227.748536291365
+Expected weight if x12 is true: 18227.748536291365
+x12 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x13 is  false: 18227.748536291365
+Expected weight if x13 is true: 18227.748536291365
+x13 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x14 is  false: 18226.776072582725
+Expected weight if x14 is true: 18228.721
+x14 is set to true.
+Setting each variable to true and false to see expected weight.
+Expected weight if x15 is  false: 18228.721
+Expected weight if x15 is true: 18228.721
+x15 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x16 is  false: 18228.721
+Expected weight if x16 is true: 18228.721
+x16 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x17 is  false: 18228.721
+Expected weight if x17 is true: 18228.721
+x17 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x18 is  false: 18228.721
+Expected weight if x18 is true: 18228.721
+x18 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x19 is  false: 18228.721
+Expected weight if x19 is true: 18228.721
+x19 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x20 is  false: 18228.721
+Expected weight if x20 is true: 18228.721
+x20 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x21 is  false: 18228.721
+Expected weight if x21 is true: 18228.721
+x21 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x22 is  false: 18228.721
+Expected weight if x22 is true: 18228.721
+x22 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x23 is  false: 18228.721
+Expected weight if x23 is true: 18228.721
+x23 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x24 is  false: 18228.721
+Expected weight if x24 is true: 18228.721
+x24 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x25 is  false: 18228.721
+Expected weight if x25 is true: 18228.721
+x25 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x26 is  false: 18228.721
+Expected weight if x26 is true: 18228.721
+x26 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x27 is  false: 18228.721
+Expected weight if x27 is true: 18228.721
+x27 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x28 is  false: 18228.721
+Expected weight if x28 is true: 18228.721
+x28 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x29 is  false: 18228.721
+Expected weight if x29 is true: 18228.721
+x29 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x30 is  false: 18228.721
+Expected weight if x30 is true: 18228.721
+x30 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x31 is  false: 18228.721
+Expected weight if x31 is true: 18228.721
+x31 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x32 is  false: 18228.721
+Expected weight if x32 is true: 18228.721
+x32 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x33 is  false: 18228.721
+Expected weight if x33 is true: 18228.721
+x33 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x34 is  false: 18228.721
+Expected weight if x34 is true: 18228.721
+x34 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x35 is  false: 18228.721
+Expected weight if x35 is true: 18228.721
+x35 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x36 is  false: 18228.721
+Expected weight if x36 is true: 18228.721
+x36 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x37 is  false: 18228.721
+Expected weight if x37 is true: 18228.721
+x37 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x38 is  false: 18228.721
+Expected weight if x38 is true: 18228.721
+x38 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x39 is  false: 18228.721
+Expected weight if x39 is true: 18228.721
+x39 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x40 is  false: 18228.721
+Expected weight if x40 is true: 18228.721
+x40 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x41 is  false: 18228.721
+Expected weight if x41 is true: 18228.721
+x41 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x42 is  false: 18228.721
+Expected weight if x42 is true: 18228.721
+x42 is set to false.
+Setting each variable to true and false to see expected weight.
+Expected weight if x43 is  false: 18228.721
+Expected weight if x43 is true: 18228.721
+x43 is set to false.
+The final results are: 
+Variables x3 x10 x11 x14  are true (everything else is false) with a final cost of $2.12251M.
+The following clauses were satisfied: The following weight is satisfied: 18228.721 in thousands of people.
+Complete
