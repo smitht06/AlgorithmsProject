@@ -48,7 +48,7 @@ public class MaxSatAlgorithm {
     }
 
     private static void chooseHigherWeight(Variables variable, double expectedWeightIfFalse, double expectedWeightIfTrue) {
-        if(expectedWeightIfFalse >= expectedWeightIfTrue){
+        if(expectedWeightIfFalse > expectedWeightIfTrue){
             System.out.println(variable.getName() + " is set to false.");
             variable.setTrue(false);
             for (Clauses clause : clauses){
@@ -58,7 +58,7 @@ public class MaxSatAlgorithm {
             }
             pop(variable);
         }
-        else if ((expectedWeightIfFalse < expectedWeightIfTrue) && (cost + variable.getCost()) < budget){
+        else if ((expectedWeightIfFalse <= expectedWeightIfTrue) && (cost + variable.getCost()) < budget){
             System.out.println(variable.getName() + " is set to true.");
             variable.setTrue(true);
             cost = cost + variable.getCost();
@@ -187,13 +187,15 @@ public class MaxSatAlgorithm {
         int i = 1;
         for (Clauses clause: clauses){
             clause.setClauseNumber(i);
-            System.out.print(" " + clause.getClauseNumber() + ",");
             i++;
+
+
             if (clause.isSatisfied()){
                 totalWeight = totalWeight + clause.getWeight();
+                System.out.print(" " + clause.getClauseNumber() + ",");}
             }
-        }
-        System.out.println("The following weight is satisfied: " + totalWeight + " in thousands of people.");
+
+        System.out.println("\nThe following weight is satisfied: " + totalWeight + " in thousands of people.");
     }
 
     private static double randomization(ArrayList<Variables> variables, ArrayList<Clauses> clauses){
@@ -228,8 +230,16 @@ public class MaxSatAlgorithm {
             }
         }
         System.out.println();
+        System.out.print("Clauses satisfied: ");
+        int i = 1;
+        for(Clauses clauses1 : clauses){
+            clauses1.setClauseNumber(i);
+            i++;
+            if(clauses1.isSatisfied()){
+            System.out.print(clauses1.getClauseNumber() + ", ");
+        }}
         System.out.println("The final weight is: " + weight + " in thousands of people.");
-        System.out.println("The total cost came to be: $" + runningCost + "M.");
+        System.out.println("The total cost came to be: $" + runningCost + "B.");
         return weight;
     }
 }
