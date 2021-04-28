@@ -1,14 +1,15 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 
 public class MaxSatAlgorithm {
     private static final double budget = 17.62;
     private static double cost = 0;
-    private static ArrayList<Variables> variables = new ArrayList<>();
-    private static ArrayList<Clauses> clauses = new ArrayList<>();
+    private static final ArrayList<Variables> variables = new ArrayList<>();
+    private static final ArrayList<Clauses> clauses = new ArrayList<>();
 
 
     public static void main(String [] args){
@@ -198,12 +199,13 @@ public class MaxSatAlgorithm {
         System.out.println("\nThe following weight is satisfied: " + totalWeight + " in thousands of people.");
     }
 
-    private static double randomization(ArrayList<Variables> variables, ArrayList<Clauses> clauses){
+    private static void randomization(ArrayList<Variables> variables, ArrayList<Clauses> clauses){
         Random randomBool = new Random();
         double weight = 0;
         double runningCost = 0;
+        Collections.shuffle(variables, new Random());
         for(Variables variable : variables) {
-            Boolean nextBool = randomBool.nextBoolean();
+            boolean nextBool = randomBool.nextBoolean();
             if (nextBool && (runningCost + variable.getCost() > budget)){
                 nextBool = false;
             }
@@ -238,8 +240,7 @@ public class MaxSatAlgorithm {
             if(clauses1.isSatisfied()){
             System.out.print(clauses1.getClauseNumber() + ", ");
         }}
-        System.out.println("The final weight is: " + weight + " in thousands of people.");
+        System.out.println("\nThe final weight is: " + weight + " in thousands of people.");
         System.out.println("The total cost came to be: $" + runningCost + "B.");
-        return weight;
     }
 }
