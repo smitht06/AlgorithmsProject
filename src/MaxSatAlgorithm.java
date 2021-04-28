@@ -181,7 +181,7 @@ public class MaxSatAlgorithm {
                 System.out.print(variable.getName() + " ");
             }
         }
-        System.out.println(" are true (everything else is false) with a final cost of $" + cost + "M.");
+        System.out.println(" are true (everything else is false) with a final cost of $" + cost + "B.");
         System.out.print("The following clauses were satisfied: ");
         for (Clauses clause: clauses){
             if (clause.isSatisfied()){
