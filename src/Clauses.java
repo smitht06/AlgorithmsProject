@@ -6,12 +6,15 @@ public class Clauses {
     private int numberOfVariables;
     private boolean isSatisfied;
     private int clauseNumber;
+    private int variablesToSatisfy;
 
     public Clauses(){};
 
     public Clauses(ArrayList<Variables> variablesInClause, double weight) {
         this.variablesInClause = variablesInClause;
         this.weight = weight;
+        this.numberOfVariables = this.getNumberOfVariables();
+        this.variablesToSatisfy = this.getNumberOfVariables()/2;
     }
 
     public int getClauseNumber() {
@@ -26,20 +29,12 @@ public class Clauses {
         return variablesInClause;
     }
 
-    public void setVariablesInClause(ArrayList<Variables> variablesInClause) {
-        this.variablesInClause = variablesInClause;
-    }
-
     public void remove(Variables variable){
         this.variablesInClause.remove(variable);
     }
 
     public double getWeight() {
         return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
     }
 
     public int getNumberOfVariables(){
@@ -56,6 +51,10 @@ public class Clauses {
 
     public void setSatisfied(boolean satisfied) {
         isSatisfied = satisfied;
+    }
+
+    public void setVariablesToSatisfy(int variablesToSatisfy) {
+        this.variablesToSatisfy = variablesToSatisfy;
     }
 
     public boolean twoVarTrueOrMore(){
@@ -75,5 +74,16 @@ public class Clauses {
             halfTrue = false;
         }
         return halfTrue;
+    }
+
+    public double calculateExpectedWeight(Variables variable){
+        double expectedWeight;
+        if (variable.isTrue()){
+            expectedWeight = (1 -  ((Math.pow(.5 , (this.numberOfVariables - this.variablesToSatisfy - 1))))) * this.weight;
+        }
+        else {
+            expectedWeight = (1 -  (Math.pow(.5 , (this.numberOfVariables - this.variablesToSatisfy)))) * this.weight;
+        }
+        return expectedWeight;
     }
 }

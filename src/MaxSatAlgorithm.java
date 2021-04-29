@@ -18,8 +18,8 @@ public class MaxSatAlgorithm {
         String argument = scanner.nextLine();
 
         if (argument.equals("1") || argument.equals("2")){
-            readFromFile("../Data/variables.csv");
-            readFromFile("../Data/clauses.csv");
+            readFromFile("Data/variables.csv");
+            readFromFile("Data/clauses.csv");
             algorithm(argument);
         }
         else {
@@ -64,6 +64,9 @@ public class MaxSatAlgorithm {
             variable.setTrue(true);
             cost = cost + variable.getCost();
             for (Clauses clause : clauses){
+                if (clause.getVariablesInClause().contains(variable)){
+                    clause.setVariablesToSatisfy(clause.getNumberOfVariables() - 1);
+                }
                 if (clause.twoVarTrueOrMore()){
                     clause.setSatisfied(true);
                 }
@@ -86,7 +89,7 @@ public class MaxSatAlgorithm {
                 expectedWeight = clause.getWeight();
             }
             else {
-                expectedWeight = (1 -  Math.pow(.5 , (clause.getNumberOfVariables()))) * clause.getWeight();
+                expectedWeight = clause.calculateExpectedWeight(variable);
             }
             expectedWeightsTrue.add(expectedWeight);
         }
@@ -103,12 +106,12 @@ public class MaxSatAlgorithm {
         for(Clauses clause : clauses){
 
             if (clause.getVariablesInClause().contains(variable) && !clause.isSatisfied()) /*and none of the variables are true */{
-                expectedWeight = (1 -  Math.pow(.5 , (clause.getNumberOfVariables() - 1/**/))) * clause.getWeight();
+                expectedWeight = clause.calculateExpectedWeight(variable);
             }else if(clause.isSatisfied()){
                 expectedWeight = clause.getWeight();
             }
             else{
-                expectedWeight = (1 -  Math.pow(.5 , (clause.getNumberOfVariables()))) * clause.getWeight();
+                expectedWeight = clause.calculateExpectedWeight(variable);
             }
             expectedWeightsFalse.add(expectedWeight);
         }
