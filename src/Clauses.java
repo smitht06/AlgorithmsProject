@@ -57,4 +57,23 @@ public class Clauses {
     public void setSatisfied(boolean satisfied) {
         isSatisfied = satisfied;
     }
+
+    public boolean twoVarTrueOrMore(){
+        boolean halfTrue;
+        int counter= 0;
+        double ratio = 0;
+        for(Variables variables: variablesInClause){
+            if (variables.isTrue()){
+                counter++;
+            }
+        }
+        ratio = (double)variablesInClause.size()/2;
+        System.out.println("ratio: " + ratio);
+        if (counter >= ratio){
+            halfTrue = true;
+        }else{
+            halfTrue = false;
+        }
+        return halfTrue;
+    }
 }

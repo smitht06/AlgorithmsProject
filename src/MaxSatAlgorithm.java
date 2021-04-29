@@ -34,7 +34,7 @@ public class MaxSatAlgorithm {
             System.out.println("Complete");
         }
         else if (algorithm.equals("2")) {
-            randomization(variables, clauses);
+            randomization(clauses);
         }
     }
 
@@ -64,7 +64,7 @@ public class MaxSatAlgorithm {
             variable.setTrue(true);
             cost = cost + variable.getCost();
             for (Clauses clause : clauses){
-                if (clause.getVariablesInClause().contains(variable)){
+                if (clause.twoVarTrueOrMore()){
                     clause.setSatisfied(true);
                 }
             }
@@ -199,12 +199,12 @@ public class MaxSatAlgorithm {
         System.out.println("\nThe following weight is satisfied: " + totalWeight + " in thousands of people.");
     }
 
-    private static void randomization(ArrayList<Variables> variables, ArrayList<Clauses> clauses){
+    private static void randomization(ArrayList<Clauses> clauses){
         Random randomBool = new Random();
         double weight = 0;
         double runningCost = 0;
-        Collections.shuffle(variables, new Random());
-        for(Variables variable : variables) {
+        Collections.shuffle(MaxSatAlgorithm.variables, new Random());
+        for(Variables variable : MaxSatAlgorithm.variables) {
             boolean nextBool = randomBool.nextBoolean();
             if (nextBool && (runningCost + variable.getCost() > budget)){
                 nextBool = false;
@@ -216,9 +216,9 @@ public class MaxSatAlgorithm {
             }
         }
 
-        for(Variables variables1 : variables) {
+        for(Variables variables1 : MaxSatAlgorithm.variables) {
             for (Clauses clause : clauses) {
-                if (variables1.isTrue() && clause.getVariablesInClause().contains(variables1) && !clause.isSatisfied()) {
+                if (variables1.isTrue() && clause.getVariablesInClause().contains(variables1) && !clause.isSatisfied() && clause.twoVarTrueOrMore()) {
                     weight += clause.getWeight();
                     clause.setSatisfied(true);
                 }
@@ -226,7 +226,7 @@ public class MaxSatAlgorithm {
         }
 
         System.out.println("The variables that were set to true are: ");
-        for(Variables variable : variables){
+        for(Variables variable : MaxSatAlgorithm.variables){
             if (variable.isTrue()){
                 System.out.print(variable.getName() + " ");
             }
