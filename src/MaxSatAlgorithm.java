@@ -64,7 +64,7 @@ public class MaxSatAlgorithm {
             variable.setTrue(true);
             cost = cost + variable.getCost();
             for (Clauses clause : clauses){
-                if (clause.halfVariablesTrue()){
+                if (clause.twoVarTrueOrMore()){
                     clause.setSatisfied(true);
                 }
             }
@@ -218,7 +218,7 @@ public class MaxSatAlgorithm {
 
         for(Variables variables1 : MaxSatAlgorithm.variables) {
             for (Clauses clause : clauses) {
-                if (variables1.isTrue() && clause.getVariablesInClause().contains(variables1) && !clause.isSatisfied() && clause.halfVariablesTrue()) {
+                if (variables1.isTrue() && clause.getVariablesInClause().contains(variables1) && !clause.isSatisfied() && clause.twoVarTrueOrMore()) {
                     weight += clause.getWeight();
                     clause.setSatisfied(true);
                 }

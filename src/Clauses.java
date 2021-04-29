@@ -58,7 +58,7 @@ public class Clauses {
         isSatisfied = satisfied;
     }
 
-    public boolean halfVariablesTrue(){
+    public boolean twoVarTrueOrMore(){
         boolean halfTrue;
         int counter= 0;
         for(Variables variables: variablesInClause){
