@@ -66,7 +66,7 @@ public class Clauses {
                 counter++;
             }
         }
-        if ((counter/4) >= 2){
+        if (counter >= variablesInClause.size()/2){
             halfTrue = true;
         }else{
             halfTrue = false;
