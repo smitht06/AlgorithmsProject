@@ -57,4 +57,20 @@ public class Clauses {
     public void setSatisfied(boolean satisfied) {
         isSatisfied = satisfied;
     }
+
+    public boolean halfVariablesTrue(){
+        boolean halfTrue;
+        int counter= 0;
+        for(Variables variables: variablesInClause){
+            if (variables.isTrue()){
+                counter++;
+            }
+        }
+        if ((counter/4) >= 2){
+            halfTrue = true;
+        }else{
+            halfTrue = false;
+        }
+        return halfTrue;
+    }
 }
