@@ -67,8 +67,8 @@ public class Clauses {
                 counter++;
             }
         }
-        ratio = variablesInClause.size()/2;
-        System.out.println("ratio" + ratio);
+        ratio = (double)variablesInClause.size()/2;
+        System.out.println("ratio: " + ratio);
         if (counter >= ratio){
             halfTrue = true;
         }else{
