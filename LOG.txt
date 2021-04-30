@@ -15,3 +15,4 @@ double
 April 27, 2021: AH: Add output files
 April 29, 2021: TS: Make clauses saitisfied only if half variables are true for randomized
 April 29, 2021: AH: Make clauses saitisfied only if half variables are true for derandomized
+April 30, 2021: AH: Add randomized variables and update outputs
