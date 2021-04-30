@@ -18,8 +18,8 @@ public class MaxSatAlgorithm {
         String argument = scanner.nextLine();
 
         if (argument.equals("1") || argument.equals("2")){
-            readFromFile("Data/variables.csv");
-            readFromFile("Data/clauses.csv");
+            readFromFile("../Data/variables.csv");
+            readFromFile("../Data/clauses.csv");
             algorithm(argument);
         }
         else {
@@ -68,8 +68,7 @@ public class MaxSatAlgorithm {
                 if (clause.getVariablesInClause().contains(variable)){
                     clause.setVariablesToSatisfy(clause.getNumberOfVariables() - 1);
                 }
-                //if (clause.twoVarTrueOrMore()){
-                if (clause.getVariablesToSatisfy() >= 0){
+                if (clause.twoVarTrueOrMore()){
                     clause.setSatisfied(true);
                 }
             }
