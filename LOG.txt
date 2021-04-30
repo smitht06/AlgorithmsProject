@@ -12,3 +12,6 @@ April 21, 2021: TS: Change cost to double and add all variables
 April 21, 2021: AH: Add all clauses, update budget to true number
 April 22, 2021: AH: Add bash script for compilation and running, change weight to thousands of people, change weight to
 double
+April 27, 2021: AH: Add output files
+April 29, 2021: TS: Make clauses saitisfied only if half variables are true for randomized
+April 29, 2021: AH: Make clauses saitisfied only if half variables are true for derandomized
