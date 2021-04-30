@@ -1,50 +1,48 @@
-Please enter 1 to the derandomized algorithm, 2 for randomized:
-2
-The variable x21 was set to true
-The variable x23 was set to false
-The variable x2 was set to true
-The variable x29 was set to true
-The variable x31 was set to false
-The variable x26 was set to true
-The variable x34 was set to false
-The variable x37 was set to false
-The variable x7 was set to true
-The variable x17 was set to false
-The variable x10 was set to false
-The variable x15 was set to true
-The variable x27 was set to true
-The variable x28 was set to true
-The variable x43 was set to true
-The variable x6 was set to false
-The variable x22 was set to false
-The variable x25 was set to true
-The variable x12 was set to true
-The variable x11 was set to false
-The variable x5 was set to false
-The variable x8 was set to false
-The variable x32 was set to true
-The variable x3 was set to true
+Please enter 1 to the derandomized algorithm, 2 for randomized:The variable x4 was set to false
 The variable x38 was set to true
-The variable x20 was set to true
-The variable x35 was set to false
-The variable x39 was set to true
-The variable x16 was set to false
-The variable x9 was set to false
-The variable x33 was set to true
-The variable x18 was set to true
-The variable x42 was set to false
-The variable x30 was set to false
-The variable x24 was set to false
-The variable x36 was set to false
+The variable x2 was set to true
 The variable x14 was set to true
-The variable x40 was set to false
 The variable x13 was set to false
+The variable x10 was set to true
+The variable x1 was set to true
+The variable x42 was set to true
+The variable x18 was set to false
+The variable x9 was set to false
+The variable x23 was set to true
+The variable x24 was set to false
+The variable x29 was set to true
+The variable x40 was set to false
+The variable x6 was set to false
+The variable x8 was set to false
+The variable x17 was set to true
+The variable x3 was set to false
+The variable x39 was set to true
+The variable x27 was set to false
+The variable x28 was set to false
+The variable x16 was set to false
+The variable x37 was set to false
+The variable x7 was set to false
+The variable x30 was set to true
+The variable x15 was set to false
+The variable x32 was set to false
+The variable x31 was set to false
+The variable x35 was set to false
 The variable x41 was set to false
-The variable x4 was set to false
-The variable x1 was set to false
-The variable x19 was set to false
+The variable x5 was set to true
+The variable x22 was set to true
+The variable x11 was set to false
+The variable x20 was set to false
+The variable x36 was set to false
+The variable x34 was set to true
+The variable x26 was set to false
+The variable x33 was set to false
+The variable x19 was set to true
+The variable x25 was set to false
+The variable x12 was set to false
+The variable x43 was set to true
+The variable x21 was set to true
 The variables that were set to true are: 
-x21 x2 x29 x26 x7 x15 x27 x28 x43 x25 x12 x32 x3 x38 x20 x39 x33 x18 x14 
-Clauses satisfied: 6, 10, 11, 12, 14, 15, 16, 18, 19, 20, 
-The final weight is: 8150.226 in thousands of people.
-The total cost came to be: $11.824744M.
+x38 x2 x14 x10 x1 x42 x23 x29 x17 x39 x30 x5 x22 x34 x19 x43 x21 
+Clauses satisfied: 1, 9, 10, 11, 13, 14, 15, 17, 19, 
+The final weight is: 7764.9349999999995 in thousands of people.
+The total cost came to be: $16.140455499999998B.
