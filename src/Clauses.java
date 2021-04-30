@@ -1,3 +1,8 @@
+/*
+ * Authors: Andrew Hartsfield, Anthony Smith
+ * Description: This class is a template for the Clauses Object
+ * */
+
 import java.util.ArrayList;
 
 public class Clauses {
@@ -61,7 +66,7 @@ public class Clauses {
         return variablesToSatisfy;
     }
 
-    public boolean twoVarTrueOrMore(){
+    public boolean halfOrMoreTrue(){
         boolean halfTrue;
         int counter= 0;
         double ratio = 0;

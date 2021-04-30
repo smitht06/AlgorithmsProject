@@ -1,3 +1,8 @@
+/*
+ * Authors: Andrew Hartsfield, Anthony Smith
+ * Description: This class is a template for the Variables Object
+ * */
+
 public class Variables {
 
     private double cost;
