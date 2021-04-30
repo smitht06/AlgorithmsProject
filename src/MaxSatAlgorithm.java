@@ -20,6 +20,7 @@ public class MaxSatAlgorithm {
         if (argument.equals("1") || argument.equals("2")){
             readFromFile("../Data/variables.csv");
             readFromFile("../Data/clauses.csv");
+            Collections.shuffle(MaxSatAlgorithm.variables, new Random());
             algorithm(argument);
         }
         else {
@@ -187,7 +188,7 @@ public class MaxSatAlgorithm {
                 System.out.print(variable.getName() + " ");
             }
         }
-        System.out.println(" are true (everything else is false) with a final cost of $" + cost + "M.");
+        System.out.println(" are true (everything else is false) with a final cost of $" + cost + "B.");
         System.out.print("The following clauses were satisfied: ");
         int i = 1;
         for (Clauses clause: clauses){
@@ -207,7 +208,6 @@ public class MaxSatAlgorithm {
         Random randomBool = new Random();
         double weight = 0;
         double runningCost = 0;
-        Collections.shuffle(MaxSatAlgorithm.variables, new Random());
         for(Variables variable : MaxSatAlgorithm.variables) {
             boolean nextBool = randomBool.nextBoolean();
             if (nextBool && (runningCost + variable.getCost() > budget)){
@@ -245,6 +245,6 @@ public class MaxSatAlgorithm {
             System.out.print(clauses1.getClauseNumber() + ", ");
         }}
         System.out.println("\nThe final weight is: " + weight + " in thousands of people.");
-        System.out.println("The total cost came to be: $" + runningCost + "M.");
+        System.out.println("The total cost came to be: $" + runningCost + "B.");
     }
 }
