@@ -1,3 +1,8 @@
+/*
+* Authors: Andrew Hartsfield, Anthony Smith
+* Description: This class reads in a file and runs the Max Sat algorithms on the data and outputs the results.
+* */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -68,7 +73,7 @@ public class MaxSatAlgorithm {
                 if (clause.getVariablesInClause().contains(variable)){
                     clause.setVariablesToSatisfy(clause.getNumberOfVariables() - 1);
                 }
-                if (clause.twoVarTrueOrMore()){
+                if (clause.halfOrMoreTrue()){
                     clause.setSatisfied(true);
                 }
             }
@@ -222,7 +227,7 @@ public class MaxSatAlgorithm {
 
         for(Variables variables1 : MaxSatAlgorithm.variables) {
             for (Clauses clause : clauses) {
-                if (variables1.isTrue() && clause.getVariablesInClause().contains(variables1) && !clause.isSatisfied() && clause.twoVarTrueOrMore()) {
+                if (variables1.isTrue() && clause.getVariablesInClause().contains(variables1) && !clause.isSatisfied() && clause.halfOrMoreTrue()) {
                     weight += clause.getWeight();
                     clause.setSatisfied(true);
                 }
