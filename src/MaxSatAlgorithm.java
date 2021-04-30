@@ -64,6 +64,10 @@ public class MaxSatAlgorithm {
             variable.setTrue(true);
             cost = cost + variable.getCost();
             for (Clauses clause : clauses){
+                Double numVariablesToSatisfy = clause.getVariablesToSatisfy();
+                if (clause.getVariablesInClause().contains(variable)){
+                    clause.setVariablesToSatisfy(clause.getNumberOfVariables() - 1);
+                }
                 if (clause.twoVarTrueOrMore()){
                     clause.setSatisfied(true);
                 }
@@ -82,11 +86,11 @@ public class MaxSatAlgorithm {
         ArrayList<Double> expectedWeightsTrue = new ArrayList<>();
 
         for(Clauses clause : clauses){
-            if (clause.getVariablesInClause().contains(variable) || clause.isSatisfied()){
+            if (clause.getVariablesToSatisfy() <= 1 || clause.isSatisfied()){
                 expectedWeight = clause.getWeight();
             }
             else {
-                expectedWeight = (1 -  Math.pow(.5 , (clause.getNumberOfVariables()))) * clause.getWeight();
+                expectedWeight = clause.calculateExpectedWeight(0);
             }
             expectedWeightsTrue.add(expectedWeight);
         }
@@ -103,12 +107,12 @@ public class MaxSatAlgorithm {
         for(Clauses clause : clauses){
 
             if (clause.getVariablesInClause().contains(variable) && !clause.isSatisfied()) /*and none of the variables are true */{
-                expectedWeight = (1 -  Math.pow(.5 , (clause.getNumberOfVariables() - 1/**/))) * clause.getWeight();
+                expectedWeight = clause.calculateExpectedWeight(1);
             }else if(clause.isSatisfied()){
                 expectedWeight = clause.getWeight();
             }
             else{
-                expectedWeight = (1 -  Math.pow(.5 , (clause.getNumberOfVariables()))) * clause.getWeight();
+                expectedWeight = clause.calculateExpectedWeight(1);
             }
             expectedWeightsFalse.add(expectedWeight);
         }
@@ -183,7 +187,7 @@ public class MaxSatAlgorithm {
                 System.out.print(variable.getName() + " ");
             }
         }
-        System.out.println(" are true (everything else is false) with a final cost of $" + cost + "B.");
+        System.out.println(" are true (everything else is false) with a final cost of $" + cost + "M.");
         System.out.print("The following clauses were satisfied: ");
         int i = 1;
         for (Clauses clause: clauses){
@@ -241,6 +245,6 @@ public class MaxSatAlgorithm {
             System.out.print(clauses1.getClauseNumber() + ", ");
         }}
         System.out.println("\nThe final weight is: " + weight + " in thousands of people.");
-        System.out.println("The total cost came to be: $" + runningCost + "B.");
+        System.out.println("The total cost came to be: $" + runningCost + "M.");
     }
 }
