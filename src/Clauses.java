@@ -6,12 +6,15 @@ public class Clauses {
     private int numberOfVariables;
     private boolean isSatisfied;
     private int clauseNumber;
+    private double variablesToSatisfy;
 
     public Clauses(){};
 
     public Clauses(ArrayList<Variables> variablesInClause, double weight) {
         this.variablesInClause = variablesInClause;
         this.weight = weight;
+        this.numberOfVariables = this.getNumberOfVariables();
+        this.variablesToSatisfy = (double) this.getNumberOfVariables()/2;
     }
 
     public int getClauseNumber() {
@@ -26,20 +29,12 @@ public class Clauses {
         return variablesInClause;
     }
 
-    public void setVariablesInClause(ArrayList<Variables> variablesInClause) {
-        this.variablesInClause = variablesInClause;
-    }
-
     public void remove(Variables variable){
         this.variablesInClause.remove(variable);
     }
 
     public double getWeight() {
         return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
     }
 
     public int getNumberOfVariables(){
@@ -58,6 +53,14 @@ public class Clauses {
         isSatisfied = satisfied;
     }
 
+    public void setVariablesToSatisfy(double variablesToSatisfy) {
+        this.variablesToSatisfy = variablesToSatisfy;
+    }
+
+    public double getVariablesToSatisfy() {
+        return variablesToSatisfy;
+    }
+
     public boolean twoVarTrueOrMore(){
         boolean halfTrue;
         int counter= 0;
@@ -68,12 +71,15 @@ public class Clauses {
             }
         }
         ratio = (double)variablesInClause.size()/2;
-        System.out.println("ratio: " + ratio);
         if (counter >= ratio){
             halfTrue = true;
         }else{
             halfTrue = false;
         }
         return halfTrue;
+    }
+
+    public double calculateExpectedWeight(int booleanFlag){
+        return (1 -  (Math.pow(.5 , (this.variablesToSatisfy - booleanFlag)))) * this.weight;
     }
 }
